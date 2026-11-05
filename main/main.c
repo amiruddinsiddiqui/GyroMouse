@@ -13,6 +13,7 @@
 
 #include "mpu6050.h"
 #include "wifi_mqtt.h"
+#include "mouse_buttons.h"
 
 
 
@@ -26,6 +27,7 @@ void app_main(void) {
 
     mqtt_app_start();
 
+    xTaskCreate(button_task, "btn_state", 2048, NULL, 10, NULL);
     xTaskCreate(mpu_task, "mpu_task", 2048, NULL, 5, NULL);
     xTaskCreate(task_publisher, "mqtt_task", 2048, NULL, 5, NULL);
 }

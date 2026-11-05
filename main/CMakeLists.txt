@@ -3,6 +3,7 @@ idf_component_register(
         "main.c"
         "wifi_mqtt.c"
         "mpu6050.c"
+        "mouse_buttons.c"
 
     INCLUDE_DIRS
         "."
@@ -14,4 +15,5 @@ idf_component_register(
         esp_netif
         nvs_flash
         esp_driver_i2c
+        esp_driver_gpio
 )
