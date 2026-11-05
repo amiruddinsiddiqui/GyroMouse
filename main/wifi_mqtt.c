@@ -12,9 +12,10 @@
 
 #include "wifi_mqtt.h"
 #include "mpu6050.h"
+#include "mouse_buttons.h"
 
-#define WIFI_SSID ""
-#define WIFI_PSWD ""
+#define WIFI_SSID "*******"
+#define WIFI_PSWD "********"
 
 #define MQTT_BROKER_URI "mqtt://broker.emqx.io"
 
@@ -113,10 +114,14 @@ void task_publisher(void *arg) {
             "\"Temperature\":%.2f,"
             "\"Gyro_X\":%.2f,"
             "\"Gyro_Y\":%.2f,"
-            "\"Gyro_Z\":%.2f}",
+            "\"Gyro_Z\":%.2f,"
+            "\"Left_btn\":%d,"
+            "\"Right_btn\":%d}",
             final_data[0], final_data[1], final_data[2],
             final_data[3],
-            final_data[4], final_data[5], final_data[6]
+            final_data[4], final_data[5], final_data[6],
+            left_btn_state,
+            right_btn_state
         );
 
         esp_mqtt_client_publish(mqtt_client_handler, "esp/data", json_payload, 0, 0, 0);
